@@ -4,7 +4,7 @@
 
 O objetivo principal desse projeto é poder alimentar automaticamente seus pets, e colher métricas de sua alimentação para análise.
 
-Esse projeto foi criado para as aulas de IOT na fiap, em cada tag se encontra versionada uma aula, confira o CHANGELOG. para mais informações.
+Esse projeto foi criado para as aulas de IOT na fiap, em cada tag se encontra versionada uma aula, confira o [CHANGELOG](CHANGELOG.md) para mais informações.
 
 As tags `v1.x.x` são das aulas do primeiro semestre e as `v2.x.x` são do segundo semestre.
 
