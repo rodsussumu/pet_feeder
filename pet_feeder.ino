@@ -1,7 +1,7 @@
 #include <Servo.h>
 
-#define PIR 7
-#define SERVO 9
+#define PIR D0
+#define SERVO D2
 #define INTERVAL 1000
 
 Servo servo;
