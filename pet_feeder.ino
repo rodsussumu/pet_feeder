@@ -1,11 +1,14 @@
 #include <Servo.h>
 
 #define PIR 7
-const int SERVO = 9;
+#define SERVO 9
+#define INTERVAL 1000
 
 Servo servo;
+
 int pos;
-int movimento;
+int movimento = 0;
+unsigned long previousMillis = 0;
 
 void abre() {
   delay(1000);
@@ -25,6 +28,18 @@ void fecha() {
   }
 }
 
+boolean feedTime() {
+  unsigned long currentMillis = millis();
+
+  if (currentMillis - previousMillis >= INTERVAL) {
+    previousMillis = currentMillis;
+    return true;
+  }
+  else {
+    return false;
+  }
+}
+
 void setup() {
   Serial.begin(9600);
   pinMode(PIR, INPUT);
@@ -33,15 +48,13 @@ void setup() {
 }
 
 void loop() {
-  movimento = digitalRead(PIR);
-
-  if(movimento == HIGH) {
-    Serial.println("Alimentando o pet.");
-    abre();
-
-    delay(1000);
-  } else {
-    Serial.println("Nenhum miau...");
-    delay(1000);
+  if(movimento == HIGH && feedTime() == true) {
+      Serial.println("Alimentando o pet.");
+      abre();
   }
+  else {
+    Serial.println("Nenhum pet...");
+  }
+
+  movimento = digitalRead(PIR);
 }
