@@ -16,9 +16,11 @@ As tags `v1.x.x` são das aulas do primeiro semestre e as `v2.x.x` são do segun
 
 * `1 PIR sensor`
 
+* `Alguns jumpers`
+
 ## Cabeamento
 
-![wiring](wiring.png)
+![wiring](img/wiring.png)
 
 Link com exemplo no [tinkercad](https://www.tinkercad.com/things/8q8TVHKfOPz-pet-feeder).
 
