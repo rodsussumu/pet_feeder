@@ -1,13 +1,29 @@
 #include <Servo.h>
 
 #define PIR 7
-#define SERVO 9
-#define INTERVAL 1000
+const int SERVO = 9;
 
 Servo servo;
-
 int pos;
-int movimento = 0;
+int movimento;
+
+void abre() {
+  delay(1000);
+  for(pos = 180; pos >= 0; pos--){
+    servo.write(pos);
+    delay(15);
+  }
+
+  delay(300);
+  fecha();
+}
+
+void fecha() {
+  for(pos = 0; pos < 180; pos++){
+    servo.write(pos);
+    delay(15);
+  }
+}
 
 void setup() {
   Serial.begin(9600);
@@ -17,23 +33,15 @@ void setup() {
 }
 
 void loop() {
-  if (digitalRead(PIR) == HIGH) {
+  movimento = digitalRead(PIR);
+
+  if(movimento == HIGH) {
     Serial.println("Alimentando o pet.");
+    abre();
 
-    for (pos = 180; pos >= 0; pos--) {
-      servo.write(pos);
-      delay(15);
-    }
-
-    delay(300);
-
-    for (pos = 0; pos < 180; pos++) {
-      servo.write(pos);
-      delay(15);
-    }
-  }
-  else {
+    delay(1000);
+  } else {
     Serial.println("Nenhum miau...");
+    delay(1000);
   }
-  delay(1000);
 }
