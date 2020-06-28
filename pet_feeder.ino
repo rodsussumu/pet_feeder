@@ -49,11 +49,11 @@ void setup() {
 
 void loop() {
   if(movimento == HIGH && feedTime() == true) {
-      Serial.println("Alimentando o pet.");
+      Serial.println(1);
       abre();
   }
   else {
-    Serial.println("Nenhum pet...");
+    Serial.println(0);
   }
 
   movimento = digitalRead(PIR);
