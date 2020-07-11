@@ -1,0 +1,18 @@
+#!/usr/bin/python3
+
+import json
+from sender import Sender
+from reader import Reader
+
+PORT = '/dev/ttyUSB0'
+BAUD = 9600
+
+reader = Reader(port=PORT, baud=BAUD)
+sender = Sender(port=PORT, baud=BAUD)
+
+while(1):
+    presence = json.loads(reader.getData())['presence']
+
+    if(presence == True):
+        sender.alimentar()
+        print('PET ALIMENTADO.\n')
