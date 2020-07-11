@@ -1,18 +1,17 @@
 #include <Servo.h>
 
 #define PIR D0
-#define SERVO D2
+#define SERVO D1
 #define INTERVAL 1000
 
 Servo servo;
 
 int pos;
-int movimento = 0;
 unsigned long previousMillis = 0;
 
 void abre() {
   delay(1000);
-  for(pos = 180; pos >= 0; pos--){
+  for (pos = 180; pos >= 0; pos--) {
     servo.write(pos);
     delay(15);
   }
@@ -22,7 +21,7 @@ void abre() {
 }
 
 void fecha() {
-  for(pos = 0; pos < 180; pos++){
+  for (pos = 0; pos < 180; pos++) {
     servo.write(pos);
     delay(15);
   }
@@ -48,13 +47,18 @@ void setup() {
 }
 
 void loop() {
-  if(movimento == HIGH && feedTime() == true) {
-      Serial.println(1);
+  if (Serial.available() > 0) {
+    if (Serial.readString() == "open") {
       abre();
+    }
+  }
+
+  if (digitalRead(PIR) && feedTime()) {
+    Serial.println(1);
   }
   else {
     Serial.println(0);
   }
 
-  movimento = digitalRead(PIR);
+  delay(1000);
 }
