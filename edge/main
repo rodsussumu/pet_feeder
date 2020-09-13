@@ -4,15 +4,37 @@ import json
 from sender import Sender
 from reader import Reader
 
+from datetime import datetime, timedelta
+from time import sleep
+import logging
+
 PORT = '/dev/ttyUSB0'
 BAUD = 9600
 
 reader = Reader(port=PORT, baud=BAUD)
 sender = Sender(port=PORT, baud=BAUD)
 
+contador = 0
+
 while(1):
     presence = json.loads(reader.getData())['presence']
 
-    if(presence == True):
+    while(presence == True and contador < 2):
         sender.alimentar()
-        print('PET ALIMENTADO.\n')
+        logging.info("Alimentar")
+        contador+=1
+        sleep(5)
+        if(contador == 2):
+            present = datetime.now()
+            future = present + timedelta(hours = 1)
+            continue
+            sleep(5)
+  
+  if(future > present):
+    present = datetime.now()
+    logging.info("Não Alimentar")
+    sleep(5)
+  elif(future < present):
+    logging.info("Reset")
+    contador = 0
+    sleep(5)
