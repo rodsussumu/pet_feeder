@@ -1,5 +1,4 @@
 import serial
-import logging
 
 class Connection:
     def __init__(self, port='/dev/ttyUSB0', baud=9600):
@@ -13,5 +12,5 @@ class Connection:
             logging.info('Conectado com sucesso.\n')
             return conn
         except:
-            logging.error('Sem conexão na porta ' + str(self.port) + '.\n')
+            logginf.error('Sem conexão na porta ' + str(self.port) + '.\n')
             return 0
